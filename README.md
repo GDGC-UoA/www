@@ -73,7 +73,7 @@ For example:
  * @param b The second number
  * @returns The sum of the two numbers
  */
-export const add = (a: number, b: number): number => a + b;
+export const add = (a: number, b: number): number => a + b
 ```
 
 ### Environment Variables
