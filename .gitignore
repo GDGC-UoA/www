@@ -47,7 +47,7 @@ yarn-error.log*
 *.pem
 
 # next.js
-/.next/
+.next/
 .out/
 
 # production
