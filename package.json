@@ -1,0 +1,15 @@
+{
+  "name": "gdgc-www",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {},
+  "devDependencies": {
+    "typescript": "7.0.2"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "packageManager": "bun@1.4.3"
+}
