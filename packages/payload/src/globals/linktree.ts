@@ -10,10 +10,13 @@ export const LinkTree: GlobalConfig = {
       name: "title",
       type: "text",
       required: true,
+      defaultValue: "GDGC UoA",
     },
     {
       name: "subtitle",
       type: "text",
+      required: true,
+      defaultValue: "Google Developer Groups on Campus @ University of Auckland",
     },
     {
       name: "instagram",

@@ -370,7 +370,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface Linktree {
   id: string;
   title: string;
-  subtitle?: string | null;
+  subtitle: string;
   instagram?: string | null;
   linkedin?: string | null;
   youtube?: string | null;
