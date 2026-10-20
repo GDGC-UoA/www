@@ -50,7 +50,7 @@ The development servers will be running at:
 
 ### Common commands
 
-Every script is a [Turborepo](https://turbo.build/repo) task, so it runs across all packages in the workspace and caches results.
+Build, dev, start, typecheck, test, and the Payload generators are [Turborepo](https://turbo.build/repo) tasks, so they run across all packages in the workspace with dependency-aware ordering and caching. Linting and formatting run once over the whole repo.
 
 | Command                   | Description                            |
 | ------------------------- | -------------------------------------- |
