@@ -2,8 +2,12 @@ import { CollectionConfig } from "payload"
 
 export const LinktreeLink: CollectionConfig = {
   slug: "linktree-link",
+  orderable: true,
   admin: {
     group: "Linktree",
+    useAsTitle: "title",
+    defaultColumns: ["title", "url"],
+    description: "Links shown on the linktree page, ordered by dragging them in the list view.",
   },
   fields: [
     {

@@ -150,11 +150,14 @@ export interface Admin {
   collection: 'admin';
 }
 /**
+ * Links shown on the linktree page, ordered by dragging them in the list view.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "linktree-link".
  */
 export interface LinktreeLink {
   id: string;
+  _order?: string | null;
   /**
    * The title of the link.
    */
@@ -295,6 +298,7 @@ export interface AdminSelect<T extends boolean = true> {
  * via the `definition` "linktree-link_select".
  */
 export interface LinktreeLinkSelect<T extends boolean = true> {
+  _order?: T;
   title?: T;
   url?: T;
   thumbnail?: T;
