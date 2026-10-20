@@ -63,11 +63,12 @@ export type SupportedTimezones =
 
 export interface Config {
   auth: {
-    users: UserAuthOperations;
+    admin: AdminAuthOperations;
   };
   blocks: {};
   collections: {
-    users: User;
+    admin: Admin;
+    'linktree-link': LinktreeLink;
     media: Media;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -76,7 +77,8 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    users: UsersSelect<false> | UsersSelect<true>;
+    admin: AdminSelect<false> | AdminSelect<true>;
+    'linktree-link': LinktreeLinkSelect<false> | LinktreeLinkSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -87,19 +89,23 @@ export interface Config {
     defaultIDType: string;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    linktree: Linktree;
+  };
+  globalsSelect: {
+    linktree: LinktreeSelect<false> | LinktreeSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
   };
-  user: User;
+  user: Admin;
   jobs: {
     tasks: unknown;
     workflows: unknown;
   };
 }
-export interface UserAuthOperations {
+export interface AdminAuthOperations {
   forgotPassword: {
     email: string;
     password: string;
@@ -119,9 +125,9 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
+ * via the `definition` "admin".
  */
-export interface User {
+export interface Admin {
   id: string;
   updatedAt: string;
   createdAt: string;
@@ -141,7 +147,31 @@ export interface User {
       }[]
     | null;
   password?: string | null;
-  collection: 'users';
+  collection: 'admin';
+}
+/**
+ * Links shown on the linktree page, ordered by dragging them in the list view.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "linktree-link".
+ */
+export interface LinktreeLink {
+  id: string;
+  _order?: string | null;
+  /**
+   * The title of the link.
+   */
+  title: string;
+  /**
+   * The URL that the link will point to.
+   */
+  url: string;
+  /**
+   * Optional thumbnail image URL for the link.
+   */
+  thumbnail?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -187,8 +217,12 @@ export interface PayloadLockedDocument {
   id: string;
   document?:
     | ({
-        relationTo: 'users';
-        value: string | User;
+        relationTo: 'admin';
+        value: string | Admin;
+      } | null)
+    | ({
+        relationTo: 'linktree-link';
+        value: string | LinktreeLink;
       } | null)
     | ({
         relationTo: 'media';
@@ -196,8 +230,8 @@ export interface PayloadLockedDocument {
       } | null);
   globalSlug?: string | null;
   user: {
-    relationTo: 'users';
-    value: string | User;
+    relationTo: 'admin';
+    value: string | Admin;
   };
   updatedAt: string;
   createdAt: string;
@@ -209,8 +243,8 @@ export interface PayloadLockedDocument {
 export interface PayloadPreference {
   id: string;
   user: {
-    relationTo: 'users';
-    value: string | User;
+    relationTo: 'admin';
+    value: string | Admin;
   };
   key?: string | null;
   value?:
@@ -238,9 +272,9 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users_select".
+ * via the `definition` "admin_select".
  */
-export interface UsersSelect<T extends boolean = true> {
+export interface AdminSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -258,6 +292,18 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "linktree-link_select".
+ */
+export interface LinktreeLinkSelect<T extends boolean = true> {
+  _order?: T;
+  title?: T;
+  url?: T;
+  thumbnail?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -316,6 +362,38 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "linktree".
+ */
+export interface Linktree {
+  id: string;
+  title: string;
+  subtitle: string;
+  instagram?: string | null;
+  linkedin?: string | null;
+  youtube?: string | null;
+  discord?: string | null;
+  website?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "linktree_select".
+ */
+export interface LinktreeSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  instagram?: T;
+  linkedin?: T;
+  youtube?: T;
+  discord?: T;
+  website?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
