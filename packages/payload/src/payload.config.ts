@@ -6,6 +6,7 @@ import { buildConfig } from "payload"
 import sharp from "sharp"
 import { Admin } from "./collections/admin"
 import { Media } from "./collections/media"
+import { LinkTree } from "./globals/linktree"
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -23,6 +24,7 @@ export default buildConfig({
     },
   },
   collections: [Admin, Media],
+  globals: [LinkTree],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
