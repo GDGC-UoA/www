@@ -1,0 +1,40 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "globalDependencies": [".oxlintrc.json", ".oxfmtrc.json"],
+  "globalEnv": ["NODE_ENV"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**"],
+      "env": ["DATABASE_URL", "PAYLOAD_SECRET"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "env": ["DATABASE_URL", "PAYLOAD_SECRET"]
+    },
+    "start": {
+      "dependsOn": ["build"],
+      "cache": false,
+      "persistent": true,
+      "env": ["DATABASE_URL", "PAYLOAD_SECRET"]
+    },
+    "typecheck": {
+      "outputs": []
+    },
+    "test": {
+      "outputs": []
+    },
+    "generate:types": {
+      "cache": true,
+      "inputs": ["$TURBO_DEFAULT$", "!src/payload-types.ts", ".env"],
+      "outputs": ["src/payload-types.ts"]
+    },
+    "generate:importmap": {
+      "cache": true,
+      "inputs": ["$TURBO_DEFAULT$", "!src/app/importMap.js", ".env"],
+      "outputs": ["src/app/importMap.js"]
+    }
+  }
+}

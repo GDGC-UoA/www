@@ -48,6 +48,30 @@ The development servers will be running at:
 
 - Backend: `http://localhost:8000`
 
+### Common commands
+
+Build, dev, start, typecheck, test, and the Payload generators are [Turborepo](https://turbo.build/repo) tasks, so they run across all packages in the workspace with dependency-aware ordering and caching. Linting and formatting run once over the whole repo.
+
+| Command                   | Description                            |
+| ------------------------- | -------------------------------------- |
+| `pnpm dev`                | Start all packages in development mode |
+| `pnpm build`              | Build all packages                     |
+| `pnpm start`              | Start all packages in production mode  |
+| `pnpm lint`               | Lint all packages                      |
+| `pnpm lint:fix`           | Lint and apply fixes                   |
+| `pnpm format`             | Check formatting                       |
+| `pnpm format:write`       | Apply formatting                       |
+| `pnpm typecheck`          | Type check all packages                |
+| `pnpm test`               | Run the test suite                     |
+| `pnpm generate:types`     | Regenerate Payload types               |
+| `pnpm generate:importmap` | Regenerate the Payload import map      |
+
+Run a task for a single package with a pnpm filter:
+
+```bash
+pnpm --filter @repo/payload dev
+```
+
 ### Keeping a clean codebase
 
 We rely on [oxc](https://github.com/oxc-project/oxc) to keep the codebase clean and consistent with linting and formatting.
@@ -98,6 +122,12 @@ We use Payload's built in code generation to generate types for our project. To 
 
 ```bash
 pnpm generate:types
+```
+
+The Payload import map is generated the same way:
+
+```bash
+pnpm generate:importmap
 ```
 
 ## Tech Stack

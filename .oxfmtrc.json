@@ -23,6 +23,7 @@
     "**/coverage/**",
     "pnpm-lock.yaml",
     "next-env.d.ts",
+    "**/importMap.js",
     "**/payload-types.ts"
   ]
 }

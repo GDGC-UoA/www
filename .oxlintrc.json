@@ -29,6 +29,7 @@
     "**/build/**",
     "**/coverage/**",
     "next-env.d.ts",
+    "**/importMap.js",
     "**/payload-types.ts"
   ]
 }
