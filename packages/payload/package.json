@@ -11,6 +11,10 @@
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
+    "format": "oxfmt .",
+    "format:write": "oxfmt . --write",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
   },
