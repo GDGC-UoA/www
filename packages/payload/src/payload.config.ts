@@ -5,6 +5,7 @@ import { lexicalEditor } from "@payloadcms/richtext-lexical"
 import { buildConfig } from "payload"
 import sharp from "sharp"
 import { Admin } from "./collections/admin"
+import { LinktreeLink } from "./collections/linktree-link"
 import { Media } from "./collections/media"
 import { LinkTree } from "./globals/linktree"
 
@@ -23,7 +24,7 @@ export default buildConfig({
       importMapFile: `${path.resolve(dirname)}/app/importMap.js`,
     },
   },
-  collections: [Admin, Media],
+  collections: [Admin, LinktreeLink, Media],
   globals: [LinkTree],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",

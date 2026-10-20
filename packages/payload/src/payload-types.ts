@@ -68,6 +68,7 @@ export interface Config {
   blocks: {};
   collections: {
     admin: Admin;
+    'linktree-link': LinktreeLink;
     media: Media;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -77,6 +78,7 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     admin: AdminSelect<false> | AdminSelect<true>;
+    'linktree-link': LinktreeLinkSelect<false> | LinktreeLinkSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -149,6 +151,27 @@ export interface Admin {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "linktree-link".
+ */
+export interface LinktreeLink {
+  id: string;
+  /**
+   * The title of the link.
+   */
+  title: string;
+  /**
+   * The URL that the link will point to.
+   */
+  url: string;
+  /**
+   * Optional thumbnail image URL for the link.
+   */
+  thumbnail?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
@@ -193,6 +216,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'admin';
         value: string | Admin;
+      } | null)
+    | ({
+        relationTo: 'linktree-link';
+        value: string | LinktreeLink;
       } | null)
     | ({
         relationTo: 'media';
@@ -262,6 +289,17 @@ export interface AdminSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "linktree-link_select".
+ */
+export interface LinktreeLinkSelect<T extends boolean = true> {
+  title?: T;
+  url?: T;
+  thumbnail?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

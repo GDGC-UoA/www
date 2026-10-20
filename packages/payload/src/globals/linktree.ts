@@ -2,6 +2,9 @@ import type { GlobalConfig } from "payload"
 
 export const LinkTree: GlobalConfig = {
   slug: "linktree",
+  admin: {
+    group: "Linktree",
+  },
   fields: [
     {
       name: "title",
