@@ -9,7 +9,7 @@
     "start": "turbo start",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
-    "format": "oxfmt .",
+    "format": "oxfmt . --check",
     "format:write": "oxfmt . --write",
     "typecheck": "turbo typecheck",
     "test": "turbo test",
