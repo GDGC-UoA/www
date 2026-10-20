@@ -28,8 +28,8 @@
     },
     "generate:types": {
       "cache": true,
-      "inputs": ["$TURBO_DEFAULT$", ".env"],
-      "outputs": ["payload-types.ts"]
+      "inputs": ["$TURBO_DEFAULT$", "!src/payload-types.ts", ".env"],
+      "outputs": ["src/payload-types.ts"]
     },
     "generate:importmap": {
       "cache": true,

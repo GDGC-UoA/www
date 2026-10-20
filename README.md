@@ -52,19 +52,19 @@ The development servers will be running at:
 
 Every script is a [Turborepo](https://turbo.build/repo) task, so it runs across all packages in the workspace and caches results.
 
-| Command | Description |
-| --- | --- |
-| `pnpm dev` | Start all packages in development mode |
-| `pnpm build` | Build all packages |
-| `pnpm start` | Start all packages in production mode |
-| `pnpm lint` | Lint all packages |
-| `pnpm lint:fix` | Lint and apply fixes |
-| `pnpm format` | Check formatting |
-| `pnpm format:write` | Apply formatting |
-| `pnpm typecheck` | Type check all packages |
-| `pnpm test` | Run the test suite |
-| `pnpm generate:types` | Regenerate Payload types |
-| `pnpm generate:importmap` | Regenerate the Payload import map |
+| Command                   | Description                            |
+| ------------------------- | -------------------------------------- |
+| `pnpm dev`                | Start all packages in development mode |
+| `pnpm build`              | Build all packages                     |
+| `pnpm start`              | Start all packages in production mode  |
+| `pnpm lint`               | Lint all packages                      |
+| `pnpm lint:fix`           | Lint and apply fixes                   |
+| `pnpm format`             | Check formatting                       |
+| `pnpm format:write`       | Apply formatting                       |
+| `pnpm typecheck`          | Type check all packages                |
+| `pnpm test`               | Run the test suite                     |
+| `pnpm generate:types`     | Regenerate Payload types               |
+| `pnpm generate:importmap` | Regenerate the Payload import map      |
 
 Run a task for a single package with a pnpm filter:
 
