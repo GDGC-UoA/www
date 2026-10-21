@@ -17,6 +17,7 @@
     "generate:importmap": "turbo generate:importmap"
   },
   "devDependencies": {
+    "@types/node": "22.19.9",
     "oxfmt": "^0.73.0",
     "oxlint": "^1.88.0",
     "turbo": "2.11.9",
