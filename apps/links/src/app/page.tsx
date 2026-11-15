@@ -1,5 +1,5 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Image from "next/image"
+import styles from "./page.module.css"
 
 export default function Home() {
   return (
@@ -15,8 +15,7 @@ export default function Home() {
         />
         <div className={styles.intro}>
           <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
+            To get started, edit the <code className={styles.code}>page.tsx</code> file.
           </h1>
           <p>
             Looking for a starting point or more instructions? Head over to{" "}
@@ -65,5 +64,5 @@ export default function Home() {
         </div>
       </main>
     </div>
-  );
+  )
 }
