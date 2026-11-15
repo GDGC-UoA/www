@@ -70,3 +70,4 @@ playwright/.cache/
 
 # turbo
 .turbo/
+.env*
