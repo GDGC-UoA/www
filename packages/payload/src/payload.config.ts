@@ -7,6 +7,7 @@ import sharp from "sharp"
 import { Admin } from "./collections/admin"
 import { LinktreeLink } from "./collections/linktree-link"
 import { Media } from "./collections/media"
+import { ReferrerMapping } from "./collections/referrer-mapping"
 import { LinkTree } from "./globals/linktree"
 
 const filename = fileURLToPath(import.meta.url)
@@ -24,7 +25,7 @@ export default buildConfig({
       importMapFile: `${path.resolve(dirname)}/app/importMap.js`,
     },
   },
-  collections: [Admin, LinktreeLink, Media],
+  collections: [Admin, LinktreeLink, Media, ReferrerMapping],
   globals: [LinkTree],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",

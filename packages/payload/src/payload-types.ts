@@ -70,6 +70,7 @@ export interface Config {
     admin: Admin;
     'linktree-link': LinktreeLink;
     media: Media;
+    'referrer-mapping': ReferrerMapping;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,6 +81,7 @@ export interface Config {
     admin: AdminSelect<false> | AdminSelect<true>;
     'linktree-link': LinktreeLinkSelect<false> | LinktreeLinkSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'referrer-mapping': ReferrerMappingSelect<false> | ReferrerMappingSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -194,6 +196,23 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "referrer-mapping".
+ */
+export interface ReferrerMapping {
+  id: string;
+  /**
+   * The name used in /api/referrer/:referrerSlug, e.g. devfest.
+   */
+  referrerSlug: string;
+  /**
+   * The destination URL for this referral link. E.g. https://google.com
+   */
+  url: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -227,6 +246,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'referrer-mapping';
+        value: string | ReferrerMapping;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -322,6 +345,16 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "referrer-mapping_select".
+ */
+export interface ReferrerMappingSelect<T extends boolean = true> {
+  referrerSlug?: T;
+  url?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
