@@ -1,0 +1,38 @@
+name: "cd"
+
+on:
+  workflow_dispatch:
+    inputs:
+      workflow:
+        description: "Deployment type"
+        type: choice
+        options:
+          - payload
+        required: true
+      environment:
+        description: "Deployment environment"
+        type: environment
+        required: true
+        default: payload-prod
+
+jobs:
+  deploy-payload:
+    name: "Deploy Payload"
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.event.inputs.environment }}
+      url: ${{ vars.DEPLOYMENT_URL }}
+    concurrency:
+      group: deploy-${{ github.event.inputs.environment }}
+      cancel-in-progress: true
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7.0.1
+
+      - name: Deploy payload
+        uses: "./.github/cd-actions/deploy-payload"
+        with:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}

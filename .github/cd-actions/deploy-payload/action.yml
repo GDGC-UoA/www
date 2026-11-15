@@ -1,0 +1,67 @@
+name: "Deploy Payload"
+
+inputs:
+  DATABASE_URL:
+    description: "The database URL to use for the deployment."
+    required: true
+  PAYLOAD_SECRET:
+    description: "The secret key used for payload encryption."
+    required: true
+  VERCEL_TOKEN:
+    description: "The Vercel token used for deployment."
+    required: true
+  VERCEL_PROJECT_ID:
+    description: "The Vercel project ID for the deployment."
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v7
+      with:
+        node-version-file: ".nvmrc"
+
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v6
+      with:
+        run_install: false
+
+    - name: Restore node_modules cache
+      uses: actions/cache@v4
+      id: cache
+      with:
+        path: |
+          node_modules
+          */node_modules
+          packages/*/node_modules
+          apps/*/node_modules
+        key: ${{ runner.os }}-node_modules-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-node_modules-
+
+    - name: Install dependencies if cache misses
+      run: NODE_ENV=production pnpm install --frozen-lockfile --ignore-scripts
+      shell: bash
+
+    - name: Install Vercel
+      shell: bash
+      run: npm i -g vercel
+
+    - name: Link vercel project
+      shell: bash
+      run: vercel pull --yes --project ${{ inputs.VERCEL_PROJECT_ID }} --token ${{ inputs.VERCEL_TOKEN }}
+
+    - name: Build
+      shell: bash
+      env:
+        DATABASE_URL: ${{ inputs.DATABASE_URL }}
+        PAYLOAD_SECRET: ${{ inputs.PAYLOAD_SECRET }}
+      run: |
+        rm -rf .git
+        NODE_OPTIONS="--max-old-space-size=4096" vercel build --prod --token ${{ inputs.VERCEL_TOKEN }}
+
+    - name: Deploy to Vercel
+      shell: bash
+      run: |
+        vercel deploy --prebuilt --prod --token ${{ inputs.VERCEL_TOKEN }}
